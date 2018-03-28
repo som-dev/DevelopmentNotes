@@ -1,4 +1,4 @@
-# debugging
+# Debugging
 
 ## strace
 ```
@@ -11,6 +11,6 @@ timeout -s SIGINT 15 "strace -p `ps -aef | grep [p]rocess-name | tr -s ' ' | cut
 while true;
 do
   logfile=monitor-log-`date +%Y-%m-%d`.txt
-  mpstat -P ALL 1 1 | tail -n +5 | head `cat /proc/cpuinfo | grep processor | wc -l`
+  mpstat -P ALL 1 1 | tail -n +5 | head `cat /proc/cpuinfo | grep processor | wc -l` >> logfile
 done
 ```

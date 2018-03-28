@@ -19,14 +19,34 @@ sudo iptables -L INPUT
 sudo iptables -D INPUT -d 1.2.3.4 -j DROP
 ```
 
-# stats
+## stats
 ```
 cat /proc/net/udp
 ip -s addr
 netstat -suna
 ```
 
-# helper script for OS-level dropped counts
+# os settings
+```
+#view nic settings
+ethtool -g enp0s3
+sudo ethtool -G enp0s3 rx 4096
+ethtool -S enp0s3 | grep rx
+
+# print irq and numa_node for each nic in list
+for nic in enp0s3; do echo $nic: `awk "/$nic/ {sub(/:/,\"\");print \$1}" /proc/interrupts | wc -l` irqs, numa node `cat /sys/class/net/$nic/device/numa_node`; done
+
+# os-limit to socket receive buffer size
+sysctl net.core.rmem_max
+sudo /sbin/sysctl -w net.core.rmem_max=67108864
+
+# various os settings
+cat /proc/sys/net/core/netdev_budget
+cat /proc/sys/net/core/netdev_max_backlog
+cat /proc/sys/net/ipv4/udp_mem
+```
+
+# helper script for os-level dropped counts
 ```
 # output dropped msg stats every so often
 # note that the position of stats differ across distros
@@ -38,7 +58,7 @@ do
   echo "$timetamp enp0s3: " `ip -s addr show enp0s3 | grep RX -A 1 | tail -1 | awk '{print $4}'` >> $logfile
   echo "$timetamp UDP: " `netstat -suna | grep 'packet receive errors'` >> $logfile
   echo "$timetamp UDP: " `netstat -suna | grep 'receive buffer errors'` >> $logfile
-  sleep 3600
+  sleep 60
 done
 
 # find the difference in stats between the beginning and the end of a file

@@ -10,3 +10,5 @@ Notes for various systems, platforms, environments, etc.
 * [packet captures](pcap.md)
 * [network](network.md)
 * [python](python.md)
+* [scripting](scripting.md)
+* [solid](solid.md)
