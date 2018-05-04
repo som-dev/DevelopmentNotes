@@ -3,12 +3,14 @@
 Notes for various systems, platforms, environments, etc.
 
 ## Table of Contents
-* [linux](linux.md)
-* [git](git.md)
+* [Linux](linux.md)
+* [Git](git.md)
 * [gdb](gdb.md)
-* [debugging](debugging.md)
-* [packet captures](pcap.md)
-* [network](network.md)
-* [python](python.md)
-* [scripting](scripting.md)
-* [solid](solid.md)
+* [Debugging](debugging.md)
+* [Packet Captures](pcap.md)
+* [Network](network.md)
+* [Python](python.md)
+* [Scripting](scripting.md)
+* [SOLID](solid.md)
+* [CMake](cmake.md)
+* [googletest](gtest.md)

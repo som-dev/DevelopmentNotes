@@ -15,7 +15,7 @@ git pull origin master
 
 git clone <url-to-project> --branch <branch>
 # keep clone in sync
-git pull origin <branch>
+git pull origin <branch> --recurse-submodules
 ```
 
 ## setup fork
@@ -43,13 +43,18 @@ git add <filename>
 git commit -m "comment"
 git push origin <branch>
 
-# keep fork in sync
+# keep branch in sync...
 git fetch upstream
-git checkout master
+git checkout <branch>
+# ... by merge
 git merge upstream/master
+# ... OR by rebase
+# keep branch in sync with master by rebase (rewind and reapply)
+git rebase upstream/master
 
-git checkout feature/x
-git rebase master
+# update submodules
+git submodule update --recursive
+
 ```
 
 ## script to keep multiple projects in sync under one top-level folder
@@ -59,7 +64,7 @@ clones=( project1 project2 project3 )
 for i in "${clones[@]}"
 do
 	cd $i
-	git pull origin master
+	git pull origin master --recurse-submodules
 	cd -
 done
 
@@ -71,6 +76,7 @@ do
 	git fetch upstream
 	git checkout master
 	git merge upstream/master
+	git submodule update --recursive
 	cd -
 done
 ```
