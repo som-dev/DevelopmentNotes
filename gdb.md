@@ -34,6 +34,13 @@ thread apply all bt 3
 # output of python backtrace across all threads (if you are debugging a python process)
 thread apply all py-bt
 
+# list all global and static variable names
+info variables
+# list local variables of current stack frame
+info locals
+# list arguments of the current stack frame
+info args
+
 # generate a core file
 generate-core-file
 
