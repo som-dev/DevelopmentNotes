@@ -32,6 +32,8 @@ git remote -v
 git checkout -b feature/x
 # delete a branch
 git branch -d feature/x
+# branch from a specific upstream branch
+git checkout --track -b branch_name upstream/branch_name
 ```
 ## workflow
 ```
